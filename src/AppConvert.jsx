@@ -7,17 +7,21 @@ import { TableObj } from './components/tableobj'
 export const AppConvert = () => {
   const initState ="[{ \"es\": \"Hola\", \"en\": 5}]";
   const [myData, setMyData] = useState(initState);
-  const [myFinal, setMyFinal] = useState(initState);
+  const [myFinal, setMyFinal] = useState();
+
 
   useEffect(() => {
-    setMyFinal(myData);
+
+    const jsonData = JSON.parse(myData);
+  
+    setMyFinal(jsonData);
   }, []);
 
   const onConvert =() =>{
     
-    
-    setMyFinal(myData);
-    console.log(myFinal);
+    const jsonData = JSON.parse(myData);
+    setMyFinal(jsonData);
+    console.log(jsonData);
 
   }
 
@@ -39,10 +43,11 @@ export const AppConvert = () => {
                       </div>
                     </div>
                     <div className='col'>
-                      <button onClick= {onConvert }>
+                      <button className='btn btn-success m-1' onClick= {onConvert }>
                         convert
                       </button>
                     </div>
+
                 </div>
               </div>
           </nav>
@@ -50,7 +55,7 @@ export const AppConvert = () => {
 
         <div className='row'>
           <div className='col'>
-            <TableObj key={"t1"} data={myFinal} />              
+            <TableObj key={"t1"} jsonData={myFinal} />              
           </div>
         </div>
       </div>

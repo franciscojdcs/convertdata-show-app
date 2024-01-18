@@ -1,11 +1,15 @@
 import React from 'react'
 import { RowObj } from './rowobj';
 
-export const TableObj = ({data}) => {
+export const TableObj = ({jsonData}) => {
+
+    if (jsonData === undefined){
+        return <>Sin Data</>;
+    }
+    //const strData = JSON.stringify(data);
 
     try{
-    //const strData = JSON.stringify(data);
-    const jsonData = JSON.parse(data);
+
 
     const headers = Object.keys(jsonData[0]);
     const rows = jsonData.map(item => Object.values(item));
@@ -32,7 +36,8 @@ export const TableObj = ({data}) => {
             </div>
         </>
     )
-                    }catch(error){
-                        console.error(error);
-                    }
+    }catch(error){
+        console.error(error.message);
+        return <>{error.message}</>
+    }
 }
